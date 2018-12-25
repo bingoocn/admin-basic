@@ -6,6 +6,7 @@
 
     <artifactId>admin-basic-resserver</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <description>资源服务器相关功能</description>
 
     <parent>
         <groupId>com.cngc.admin</groupId>
@@ -21,7 +22,6 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-jwt</artifactId>
-            <version>1.0.9.RELEASE</version>
         </dependency>
 
     </dependencies>

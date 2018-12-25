@@ -3,23 +3,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>admin-basic-security</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <description>admin项目中,与安全验证有关的功能</description>
-
     <parent>
         <groupId>com.cngc.admin</groupId>
         <artifactId>admin-starter-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <artifactId>admin-basic-core</artifactId>
+    <description>admin项目基础功能,实现整个项目中的公共功能,且与spring mvc框架强相关,与具体业务功能弱相关.</description>
+
     <dependencies>
         <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
     </dependencies>
+
 
 </project>
