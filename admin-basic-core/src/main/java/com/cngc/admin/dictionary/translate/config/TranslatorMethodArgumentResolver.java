@@ -35,7 +35,13 @@ public class TranslatorMethodArgumentResolver implements HandlerMethodArgumentRe
 
     @Override
     public boolean supportsParameter(@NotNull MethodParameter parameter) {
-        for (Annotation annotation : parameter.getParameterAnnotations()) {
+        Annotation[] annotations;
+        try {
+            annotations = getParameterAnnotations(parameter);
+        } catch (Exception e) {
+            return false;
+        }
+        for (Annotation annotation : annotations) {
             if (annotation.annotationType().equals(EnableRequestDictTranslate.class)) {
                 return true;
             }
@@ -70,7 +76,7 @@ public class TranslatorMethodArgumentResolver implements HandlerMethodArgumentRe
         } catch (Exception e) {
             throw new RuntimeException("无法处理RequestMappingHandlerAdapter.argumentResolvers", e);
         }
-        Annotation[] annotations = parameter.getParameterAnnotations();
+        Annotation[] annotations = getParameterAnnotations(parameter);
         Annotation[] annotationsNew = DictTranslateUtils.removeDictTranslateAnnotation(annotations, EnableRequestDictTranslate.class);
 
         Field paramterAnnotationsField = MethodParameter.class.getDeclaredField("parameterAnnotations");
@@ -111,6 +117,12 @@ public class TranslatorMethodArgumentResolver implements HandlerMethodArgumentRe
             }
         }
         return result;
+    }
+
+    private Annotation[] getParameterAnnotations(MethodParameter parameter) throws NoSuchFieldException, IllegalAccessException {
+        Field paramterAnnotationsField = MethodParameter.class.getDeclaredField("parameterAnnotations");
+        paramterAnnotationsField.setAccessible(true);
+        return (Annotation[]) paramterAnnotationsField.get(parameter);
     }
 
 
