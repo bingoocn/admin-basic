@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.web.cors.CorsConfiguration;
@@ -58,13 +59,15 @@ public class ResourceServerConfigAdapter extends ResourceServerConfigurerAdapter
         return converter;
     }
 
-    @Autowired
-    JwtAccessTokenConverter jwtAccessTokenConverter;
+    @Bean
+    public TokenStore adminJwtTokenStore() {
+        return new JwtTokenStore(jwtTokenEnhancer());
+    }
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
-        DefaultAccessTokenConverter accessTokenConverter = (DefaultAccessTokenConverter) jwtAccessTokenConverter.getAccessTokenConverter();
+        DefaultAccessTokenConverter accessTokenConverter = (DefaultAccessTokenConverter) jwtTokenEnhancer().getAccessTokenConverter();
         accessTokenConverter.setUserTokenConverter(new AdminUserAuthenticationConverter());
-        resources.tokenStore(new JwtTokenStore(jwtAccessTokenConverter));
+        resources.tokenStore(adminJwtTokenStore());
     }
 }
