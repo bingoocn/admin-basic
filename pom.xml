@@ -13,6 +13,7 @@
         <module>admin-basic-security</module>
         <module>admin-basic-resserver</module>
         <module>admin-basic-core</module>
+        <module>admin-basic-utils</module>
     </modules>
 
     <build>
