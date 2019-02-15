@@ -70,4 +70,14 @@ public class Constants {
 	 */
 	public static final String DATADICTIONARYROOT_TYPE = "数据字典";
 
+	/**
+	 * 系统管理员登录账户名
+	 */
+	public static final String SYSTEMADMIN = "systemadmin";
+
+	/**
+	 * 系统安全员登录账户名
+	 */
+	public static final String SYSTEMSECURITY = "systemsecurity";
+
 }
