@@ -60,7 +60,14 @@ public class Constants {
 
 	/**
 	 * 数据字典虚拟根节点ID
+     *（虚拟根节点由前端创建，此常量用于后台判断是否为根节点）
 	 */
 	public static final String DATADICTIONARYROOT_ID = "1";
+
+	/**
+	 * 数据字典虚拟根节点类别
+     *（虚拟根节点由前端创建，此常量用于后台判断是否为根节点）
+	 */
+	public static final String DATADICTIONARYROOT_TYPE = "数据字典";
 
 }
