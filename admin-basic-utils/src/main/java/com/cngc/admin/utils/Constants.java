@@ -18,6 +18,12 @@ public class Constants {
 	public static final String IS_SYS_BUILT_IN_N = "0";//否
 
 	/**
+	 * 是否默认
+	 */
+	public static final String IS_DEFAULT_Y = "1";//是
+	public static final String IS_DEFAULT_N = "0";//否
+
+	/**
 	 * 是否可编辑
 	 */
 	public static final String IS_CAN_UPDATE_Y = "1";//是
