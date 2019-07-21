@@ -1,0 +1,24 @@
+﻿.vs/
+#class file
+*.class
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# logs #
+logs
+
+# eclipse ignore
+.settings/
+
+#忽略build和target文件夹
+build/
+target/
+out/
+.settings/
+.flattened-pom.xml
+
+
