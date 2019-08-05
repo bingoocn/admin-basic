@@ -65,10 +65,10 @@ public class Constants {
 	public static final String SYSTEMROOT_ID = "1";
 
 	/**
-	 * 数据字典虚拟根节点ID
+	 * 数据字典虚拟根节点code
      *（虚拟根节点由前端创建，此常量用于后台判断是否为根节点）
 	 */
-	public static final String DATADICTIONARYROOT_ID = "1";
+	public static final String DATADICTIONARYROOT_CODE = "dataDictionary";
 
 	/**
 	 * 数据字典虚拟根节点类别
