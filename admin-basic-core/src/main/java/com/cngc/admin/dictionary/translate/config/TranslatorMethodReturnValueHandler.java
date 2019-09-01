@@ -42,7 +42,11 @@ public class TranslatorMethodReturnValueHandler implements HandlerMethodReturnVa
 
     @Override
     public void handleReturnValue(Object returnValue,@NotNull MethodParameter returnType,@NotNull ModelAndViewContainer mavContainer,@NotNull NativeWebRequest webRequest) throws Exception {
-        returnValue = DictTranslateUtils.processData(returnValue, returnType.getMethodAnnotations());
+        boolean isCodeAndNameStyle = DictTranslateUtils.isCodeAndNameStyle(webRequest);
+        DictTranslateUtils.setIsCodeAndNameStyle(isCodeAndNameStyle);
+        if(!isCodeAndNameStyle) {
+            returnValue = DictTranslateUtils.processData(returnValue, returnType.getMethodAnnotations());
+        }
         /*Executable executable = returnType.getExecutable();
         Field declaredAnnotationsField = Executable.class.getDeclaredField("declaredAnnotations");
         declaredAnnotationsField.setAccessible(true);

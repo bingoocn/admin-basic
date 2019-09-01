@@ -2,6 +2,7 @@ package com.cngc.admin.dictionary.translate.utils;
 
 import com.cngc.admin.dictionary.translate.annotation.DictTranslator;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.web.context.request.WebRequest;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -14,6 +15,10 @@ import java.util.*;
  * @author duanyl
  */
 public class DictTranslateUtils {
+
+    private static final ThreadLocal<Boolean> IS_CODE_AND_NAME_STYLE = new ThreadLocal<>();
+
+    private static final String DICTIONARY_STYLE = "X-DICTIONARY-STYLE";
 
     private static boolean isSimpleClass(Object data) {
 
@@ -98,5 +103,40 @@ public class DictTranslateUtils {
             annotationsNew = new Annotation[0];
         }
         return annotationsNew;
+    }
+
+    /**
+     * 检查请求是否使用name与code连用的字典风格.
+     *
+     * @param request 请求对象
+     * @return 是否
+     */
+    public static boolean isCodeAndNameStyle(WebRequest request) {
+        return "code+name".equals(request.getHeader(DICTIONARY_STYLE));
+    }
+
+    /**
+     * 设置当前请求是否采用字典code&name风格.
+     *
+     * @param isCodeAndNameStyle boolean
+     */
+    public static void setIsCodeAndNameStyle(Boolean isCodeAndNameStyle) {
+        IS_CODE_AND_NAME_STYLE.set(isCodeAndNameStyle);
+    }
+
+    /**
+     * 获取当前请求是否采用字典code&name风格.
+     *
+     * @return boolean
+     */
+    public static boolean getIsCodeAndNameStyle() {
+        return IS_CODE_AND_NAME_STYLE.get();
+    }
+
+    /**
+     * 清空前请求是否采用字典code&name风格.
+     */
+    public static void removeIsCodeAndNameStyle() {
+        IS_CODE_AND_NAME_STYLE.remove();
     }
 }

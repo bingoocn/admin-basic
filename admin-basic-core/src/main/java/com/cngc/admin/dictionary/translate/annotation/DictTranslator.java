@@ -1,5 +1,8 @@
 package com.cngc.admin.dictionary.translate.annotation;
 
+import com.cngc.admin.dictionary.translate.config.DictTranslateSerializer;
+import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.ElementType;
@@ -14,6 +17,8 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
+@JacksonAnnotationsInside
+@JsonSerialize(using = DictTranslateSerializer.class)
 public @interface DictTranslator {
 
     /**

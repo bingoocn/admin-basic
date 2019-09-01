@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import javax.validation.constraints.NotNull;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Optional;
 
 /**
  * 请求参数数据字典转换解释器.
@@ -89,15 +90,17 @@ public class TranslatorMethodArgumentResolver implements HandlerMethodArgumentRe
 
         //resolvercomposite进行处理,返回处理后的参数数据.
         Object result = argumentResolvers.resolveArgument(parameter, mavContainer, webRequest, binderFactory);
-        if (result == null) {
-            return null;
+        // 请求时字典类型属性使用code&name风格时,不进行字典name->code的处理.
+        if (DictTranslateUtils.isCodeAndNameStyle(webRequest) || result == null) {
+            return result;
         }
 
+        Object initObject = parameter.getParameterType().newInstance();
         //进行字段的数据字典转换处理.
         if (DictTranslateUtils.isStringClass(result)) {
             DictTranslator dictTranslatorAnnotation = parameter.getParameterAnnotation(DictTranslator.class);
             if (dictTranslatorAnnotation != null) {
-                result = convertDictData(result.toString(), dictTranslatorAnnotation);
+                result = convertDictData(result.toString(), dictTranslatorAnnotation, null);
             }
         } else {
             //TODO 处理嵌套复杂对象
@@ -112,7 +115,7 @@ public class TranslatorMethodArgumentResolver implements HandlerMethodArgumentRe
                         continue;
                     }
                     String displayStrValue = fieldValue.toString();
-                    field.set(result, convertDictData(displayStrValue, dicTranslatorAnnotation));
+                    field.set(result, convertDictData(displayStrValue, dicTranslatorAnnotation, Optional.ofNullable(field.get(initObject)).map(v -> v.toString()).orElse(null)));
                 }
             }
         }
@@ -126,8 +129,12 @@ public class TranslatorMethodArgumentResolver implements HandlerMethodArgumentRe
     }
 
 
-    private String convertDictData(String displayName, @NotNull DictTranslator dictTranslatorAnnotation) {
-        return convertDictData(dictTranslatorAnnotation.type(), displayName,
+    private String convertDictData(String value, @NotNull DictTranslator dictTranslatorAnnotation, String initValue) {
+        // 如果属性值等于对象初始化时的赋值,则不进行处理.
+        if (!StringUtils.isEmpty(initValue) && initValue.equals(value)) {
+            return value;
+        }
+        return convertDictData(dictTranslatorAnnotation.type(), value,
                 dictTranslatorAnnotation.isMultiVal(), dictTranslatorAnnotation.split());
     }
 
