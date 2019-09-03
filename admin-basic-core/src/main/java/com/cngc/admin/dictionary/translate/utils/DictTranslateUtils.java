@@ -129,7 +129,10 @@ public class DictTranslateUtils {
      *
      * @return boolean
      */
-    public static boolean getIsCodeAndNameStyle() {
+    public static Boolean getIsCodeAndNameStyle() {
+        if(IS_CODE_AND_NAME_STYLE.get() == null) {
+            return false;
+        }
         return IS_CODE_AND_NAME_STYLE.get();
     }
 

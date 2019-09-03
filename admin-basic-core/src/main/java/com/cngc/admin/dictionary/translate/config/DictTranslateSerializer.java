@@ -43,6 +43,7 @@ public class DictTranslateSerializer extends JsonSerializer<String> implements C
         }else {
             gen.writeObject(value);
         }
+        DictTranslateUtils.removeIsCodeAndNameStyle();
     }
 
     @Override
