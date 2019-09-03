@@ -1,7 +1,7 @@
 package com.cngc.admin.dictionary.translate.utils;
 
 import com.cngc.admin.dictionary.translate.service.DicTranslatorService;
-import com.cngc.admin.utils.SpringContextUtil;
+import com.cngc.boot.core.util.SpringContextUtil;
 
 /**
  * DictTranslatorService代理类.

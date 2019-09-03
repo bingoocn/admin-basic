@@ -2,7 +2,7 @@ package com.cngc.admin.dictionary.translate.annotation;
 
 import com.cngc.admin.dictionary.translate.config.RequestMappingHandlerAdapterPostProcessor;
 import com.cngc.admin.properties.DateFormatProperties;
-import com.cngc.admin.utils.SpringContextUtil;
+import com.cngc.boot.core.util.SpringContextUtil;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;
