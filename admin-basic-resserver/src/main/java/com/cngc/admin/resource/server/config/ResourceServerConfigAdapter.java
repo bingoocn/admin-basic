@@ -5,7 +5,6 @@ import com.cngc.admin.resource.server.domain.TokenKey;
 import com.cngc.admin.security.token.AdminUserAuthenticationConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -26,7 +25,6 @@ import java.util.Arrays;
  * @author duanyl
  */
 @EnableResourceServer
-@Configuration
 public class ResourceServerConfigAdapter extends ResourceServerConfigurerAdapter {
 
     @Autowired
