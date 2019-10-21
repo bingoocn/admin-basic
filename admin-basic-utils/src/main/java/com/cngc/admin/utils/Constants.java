@@ -79,7 +79,7 @@ public class Constants {
 	/**
 	 * 系统管理员、系统安全员、超级管理员角色编码数组
 	 */
-	public static final String[] ADMIN_ROLE_CODES = {"system_admin", "system_security", "super_admin"};
+	public static final String[] ADMIN_ROLE_CODES = {"system_admin", "system_security", "security_auditor", "super_admin"};
 
 	/**
 	 * 系统管理员编码
