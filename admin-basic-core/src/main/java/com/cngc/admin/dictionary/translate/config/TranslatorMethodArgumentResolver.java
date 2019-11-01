@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import javax.validation.constraints.NotNull;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -95,7 +96,11 @@ public class TranslatorMethodArgumentResolver implements HandlerMethodArgumentRe
             return result;
         }
 
-        Object initObject = parameter.getParameterType().newInstance();
+        Object initObject = null;
+        boolean isCollection = parameter.getParameterType().equals(List.class);
+        if (!isCollection) {
+            initObject = parameter.getParameterType().newInstance();
+        }
         //进行字段的数据字典转换处理.
         if (DictTranslateUtils.isStringClass(result)) {
             DictTranslator dictTranslatorAnnotation = parameter.getParameterAnnotation(DictTranslator.class);

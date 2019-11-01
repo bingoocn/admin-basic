@@ -2,6 +2,7 @@ package com.cngc.admin.resource.server.config;
 
 import com.cngc.admin.resource.server.client.TokenKeyClient;
 import com.cngc.admin.resource.server.domain.TokenKey;
+import com.cngc.admin.security.filter.UrlTokenConverterFilter;
 import com.cngc.admin.security.token.AdminUserAuthenticationConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import javax.servlet.Filter;
 import java.util.Arrays;
 
 /**
@@ -67,5 +69,10 @@ public class ResourceServerConfigAdapter extends ResourceServerConfigurerAdapter
         DefaultAccessTokenConverter accessTokenConverter = (DefaultAccessTokenConverter) jwtTokenEnhancer().getAccessTokenConverter();
         accessTokenConverter.setUserTokenConverter(new AdminUserAuthenticationConverter());
         resources.tokenStore(adminJwtTokenStore());
+    }
+
+    @Bean
+    public Filter urlTokenConverterFilter() {
+        return new UrlTokenConverterFilter();
     }
 }
