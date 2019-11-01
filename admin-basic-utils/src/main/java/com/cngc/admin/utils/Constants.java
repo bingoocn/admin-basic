@@ -77,13 +77,28 @@ public class Constants {
 	public static final String DATADICTIONARYROOT_TYPE = "数据字典";
 
 	/**
-	 * 系统管理员登录账户名
+	 * 系统管理员、系统安全员、超级管理员角色编码数组
 	 */
-	public static final String SYSTEMADMIN = "systemadmin";
+	public static final String[] ADMIN_ROLE_CODES = {"system_admin", "system_security", "security_auditor", "super_admin"};
 
 	/**
-	 * 系统安全员登录账户名
+	 * 系统管理员编码
 	 */
-	public static final String SYSTEMSECURITY = "systemsecurity";
+	public static final String SYSTEM_ADMIN_CODE = "system_admin";
+
+	/**
+	 * 系统安全员编码
+	 */
+	public static final String SYSTEM_SECURITY_CODE = "system_security";
+
+	/**
+	 * 安全审计员编码
+	 */
+	public static final String SECURITY_AUDITOR_CODE = "security_auditor";
+
+	/**
+	 * 超级管理员编码
+	 */
+	public static final String SUPER_ADMIN_CODE = "super_admin";
 
 }
